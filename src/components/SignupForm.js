@@ -10,22 +10,21 @@ const SignupForm = () => {
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
   const handleClickSignup = () => {
-    try {
-      axios
-        .post(
-          "https://pre-onboarding-selection-task.shop/auth/signup",
-          {
-            email: email,
-            password: password,
-          },
-          {
-            headers: { "Content-Type": "application/json" },
-          }
-        )
-        .then(() => navigate("/signin"));
-    } catch (err) {
-      alert("회원가입에 실패했습니다.");
-    }
+    axios
+      .post(
+        "https://pre-onboarding-selection-task.shop/auth/signup",
+        {
+          email: email,
+          password: password,
+        },
+        {
+          headers: { "Content-Type": "application/json" },
+        }
+      )
+      .then(() => navigate("/signin"))
+      .catch((err) => {
+        alert(`회원가입에 실패했습니다. ${err.response.status} error`);
+      });
   };
 
   // 유효성 검사
