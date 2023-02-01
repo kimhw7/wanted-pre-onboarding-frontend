@@ -1,7 +1,15 @@
-import styled from "styled-component";
+import styled from "styled-components";
 
-const Signup = () => {
-  return <div></div>;
+import SigninForm from "../components/SigninForm";
+
+const Signin = () => {
+  return (
+    <SigninWrapper>
+      <SigninForm />
+    </SigninWrapper>
+  );
 };
 
-export default Signup;
+const SigninWrapper = styled.main``;
+
+export default Signin;
