@@ -1,7 +1,5 @@
-import styled from "styled-components";
-
-const TodoList = () => {
-  return <div></div>;
+const TodoList = ({ id, todo, isCompleted, userId }) => {
+  return <div>{todo}</div>;
 };
 
 export default TodoList;
