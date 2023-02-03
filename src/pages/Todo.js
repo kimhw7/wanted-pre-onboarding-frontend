@@ -58,17 +58,19 @@ const Todo = () => {
           추가
         </button>
       </div>
-      <div>
-        {todoListData.map((el) => (
-          <TodoList
-            key={el.id}
-            id={el.id}
-            todo={el.todo}
-            isCompleted={el.isCompleted}
-            userId={el.userId}
-          />
-        ))}
-      </div>
+      <ul>
+        {todoListData &&
+          todoListData.map((el) => (
+            <TodoList
+              key={el.id}
+              id={el.id}
+              todo={el.todo}
+              isCompleted={el.isCompleted}
+              userId={el.userId}
+              getTodos={getTodos}
+            />
+          ))}
+      </ul>
     </TodoPageWrapper>
   );
 };
