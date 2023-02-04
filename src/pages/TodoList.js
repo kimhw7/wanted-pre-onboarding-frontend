@@ -3,9 +3,9 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-import TodoList from "../components/TodoList";
+import Todo from "../components/Todo";
 
-const Todo = () => {
+const TodoList = () => {
   const navigate = useNavigate();
   const accessToken = localStorage.getItem("accessToken");
   const [todoListData, setTodoListData] = useState(undefined);
@@ -67,7 +67,7 @@ const Todo = () => {
       <ul>
         {todoListData &&
           todoListData.map((el) => (
-            <TodoList
+            <Todo
               key={el.id}
               id={el.id}
               todo={el.todo}
@@ -83,4 +83,4 @@ const Todo = () => {
 
 const TodoPageWrapper = styled.main``;
 
-export default Todo;
+export default TodoList;

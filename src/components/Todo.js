@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { useState } from "react";
 import axios from "axios";
 
-const TodoList = ({ id, todo, isCompleted, userId, getTodos }) => {
+const Todo = ({ id, todo, isCompleted, userId, getTodos }) => {
   const accessToken = localStorage.getItem("accessToken");
   const [isOpenUpdate, setIsOpenUpdate] = useState(false);
   const [updateInputText, setUpdateInputText] = useState(todo);
@@ -101,4 +101,4 @@ const TodoLi = styled.li`
   display: flex;
 `;
 
-export default TodoList;
+export default Todo;
