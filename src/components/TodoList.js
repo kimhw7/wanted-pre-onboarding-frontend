@@ -5,16 +5,16 @@ import axios from "axios";
 const TodoList = ({ id, todo, isCompleted, userId, getTodos }) => {
   const accessToken = localStorage.getItem("accessToken");
   const [isOpenUpdate, setIsOpenUpdate] = useState(false);
-  const [updateInputText, setUpdateInputText] = useState("");
+  const [updateInputText, setUpdateInputText] = useState(todo);
+  const [updateIsCompleted, setUpdateIsCompleted] = useState(isCompleted);
 
   const updateTodo = () => {
-    // 현재 500error 나는 상황
     axios
       .put(
-        `https://pre-onboarding-selection-task.shop/todos/:${id}`,
+        `https://pre-onboarding-selection-task.shop/todos/${id}`,
         {
           todo: updateInputText,
-          isCompleted: true,
+          isCompleted: updateIsCompleted,
         },
         {
           headers: {
@@ -26,54 +26,73 @@ const TodoList = ({ id, todo, isCompleted, userId, getTodos }) => {
       .then(() => {
         getTodos();
       })
-      .catch(() => {
-        getTodos();
+      .catch((err) => {
+        alert(`todo update failed. ${err.response.status} error`);
       });
   };
 
   const deleteTodo = () => {
     axios
-      .delete(`https://pre-onboarding-selection-task.shop/todos/:${id}`, {
+      .delete(`https://pre-onboarding-selection-task.shop/todos/${id}`, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
       })
       .then(() => {
         getTodos();
+      })
+      .catch((err) => {
+        alert(`todo delete failed. ${err.response.status} error`);
       });
+  };
+
+  const cancelEdit = () => {
+    setUpdateInputText(todo);
+    setIsOpenUpdate(false);
   };
 
   return (
     <TodoLi>
       <input
-        type={"text"}
-        defaultValue={todo}
-        onChange={(e) => {
-          setUpdateInputText(e.target.value);
-        }}
-        disabled={isOpenUpdate ? false : true}
+        type={"checkbox"}
+        defaultChecked={isCompleted}
+        onClick={() => setUpdateIsCompleted(!updateIsCompleted)}
       />
-      <div className="buttonWrapper">
-        {isOpenUpdate ? (
+      <input
+        type={"text"}
+        value={updateInputText}
+        onChange={(e) => setUpdateInputText(e.target.value)}
+        disabled={isOpenUpdate ? false : true}
+        data-testid="modify-input"
+      />
+      {isOpenUpdate ? (
+        <div className="buttonWrapper">
           <button
+            data-testid="submit-button"
             onClick={() => {
               updateTodo();
               setIsOpenUpdate(false);
             }}
           >
-            완료
+            제출
           </button>
-        ) : (
-          <button onClick={() => setIsOpenUpdate(true)}>수정</button>
-        )}
-        <button
-          onClick={() => {
-            deleteTodo();
-          }}
-        >
-          삭제
-        </button>
-      </div>
+          <button data-testid="cancel-button" onClick={() => cancelEdit()}>
+            취소
+          </button>
+        </div>
+      ) : (
+        <div className="buttonWrapper">
+          <button
+            data-testid="modify-button"
+            onClick={() => setIsOpenUpdate(true)}
+          >
+            수정
+          </button>
+          <button data-testid="delete-button" onClick={() => deleteTodo()}>
+            삭제
+          </button>
+        </div>
+      )}
     </TodoLi>
   );
 };

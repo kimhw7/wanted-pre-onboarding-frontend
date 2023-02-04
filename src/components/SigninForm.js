@@ -26,7 +26,7 @@ const SigninForm = () => {
         navigate("/todo");
       })
       .catch((err) => {
-        alert(`로그인에 실패했습니다. ${err.response.status} error`);
+        alert(`login failed. ${err.response.status} error`);
       });
   };
 
