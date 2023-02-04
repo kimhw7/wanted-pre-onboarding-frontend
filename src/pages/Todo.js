@@ -1,10 +1,12 @@
 import styled from "styled-components";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 import TodoList from "../components/TodoList";
 
 const Todo = () => {
+  const navigate = useNavigate();
   const accessToken = localStorage.getItem("accessToken");
   const [todoListData, setTodoListData] = useState(undefined);
   const [addTodoInput, setAddTodoInput] = useState("");
@@ -40,7 +42,11 @@ const Todo = () => {
   };
 
   useEffect(() => {
-    getTodos();
+    if (!accessToken) {
+      navigate("/signin");
+    } else {
+      getTodos();
+    }
   }, []);
   return (
     <TodoPageWrapper>
