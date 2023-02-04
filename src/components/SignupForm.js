@@ -56,7 +56,6 @@ const SignupForm = () => {
       >
         회원가입
       </button>
-      <div>hi</div>
     </FormWrapper>
   );
 };
