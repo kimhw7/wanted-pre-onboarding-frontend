@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
 const Todo = ({ id, todo, isCompleted, userId, getTodos }) => {
@@ -7,6 +7,7 @@ const Todo = ({ id, todo, isCompleted, userId, getTodos }) => {
   const [isOpenUpdate, setIsOpenUpdate] = useState(false);
   const [updateInputText, setUpdateInputText] = useState(todo);
   const [updateIsCompleted, setUpdateIsCompleted] = useState(isCompleted);
+  console.log(updateIsCompleted);
 
   const updateTodo = () => {
     axios
@@ -51,12 +52,20 @@ const Todo = ({ id, todo, isCompleted, userId, getTodos }) => {
     setIsOpenUpdate(false);
   };
 
+  // useEffect(() => {
+  //   updateTodo();
+  // }, [updateIsCompleted]);
+
   return (
     <TodoLi>
       <input
         type={"checkbox"}
         defaultChecked={isCompleted}
-        onClick={() => setUpdateIsCompleted(!updateIsCompleted)}
+        onClick={() => {
+          setUpdateIsCompleted(!updateIsCompleted).then(() => {
+            updateTodo();
+          });
+        }}
       />
       <input
         type={"text"}
