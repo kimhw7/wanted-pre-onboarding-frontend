@@ -58,6 +58,7 @@ const Todo = ({ id, todo, isCompleted, userId, getTodos }) => {
         type={"checkbox"}
         defaultChecked={isCompleted}
         onClick={() => setUpdateIsCompleted(!updateIsCompleted)}
+        checked={updateIsCompleted}
       />
       <input
         type={"text"}
