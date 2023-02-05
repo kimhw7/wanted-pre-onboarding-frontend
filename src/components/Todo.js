@@ -49,6 +49,7 @@ const Todo = ({ id, todo, isCompleted, userId, getTodos }) => {
   const cancelEdit = () => {
     setUpdateInputText(todo);
     setIsOpenUpdate(false);
+    setUpdateIsCompleted(isCompleted)
   };
 
   return (
