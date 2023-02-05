@@ -52,6 +52,7 @@ const TodoList = () => {
     <TodoPageWrapper>
       <div className="addTodoWrapper">
         <input
+          className="addTodo"
           value={addTodoInput}
           type={"text"}
           data-testid="new-todo-input"
@@ -64,7 +65,7 @@ const TodoList = () => {
           추가
         </button>
       </div>
-      <ul>
+      <ul className="todolist">
         {todoListData &&
           todoListData.map((el) => (
             <Todo
@@ -81,6 +82,20 @@ const TodoList = () => {
   );
 };
 
-const TodoPageWrapper = styled.main``;
+const TodoPageWrapper = styled.main`
+  min-height: 400px;
+  width: 500px;
+  margin: auto;
+  margin-top: 300px;
+  input,
+  button {
+    padding: 4px;
+    margin-right: 8px;
+    margin-bottom: 8px;
+  }
+  .addTodo {
+    width: 210px;
+  }
+`;
 
 export default TodoList;

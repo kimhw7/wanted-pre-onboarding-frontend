@@ -22,6 +22,9 @@ const Signup = () => {
 
 const SignupWrapper = styled.main`
   height: 400px;
+  width: 500px;
+  margin: auto;
+  margin-top: 300px;
 `;
 
 export default Signup;
